@@ -1,0 +1,56 @@
+
+NETWORKX
+
+weird errors? Are you in the right virtual env? 
+
+$ source networkx-dev/bin/activate
+
+Test specific file 
+
+$ PYTHONPATH=. pytest networkx/generators/tests/test_line.py
+
+cov report 
+
+$ PYTHONPATH=. pytest --cov=networkx/generators --cov-report term-missing --runslow --doctest-modules --durations=20 --pyargs networkx/generators
+$ PYTHONPATH=. pytest --cov=networkx networkx
+Doctest 
+
+$ PYTHONPATH=. pytest --doctest-modules networkx
+
+documentation
+$ make html
+
+sync main
+$ git fetch upstream main
+$ git merge upstream/main
+
+link issue to pr
+Closes #issue_number
+
+NX-GUIDES 
+
+virtual env 
+$ source nx-guides-dev/bin/activate
+
+nx-guides workflow 
+https://github.com/networkx/nx-guides/blob/main/.github/workflows/notebooks.yml (workflow)
+
+pre-commit (use bash script)
+
+# The following commands finds ALL the .md files in the repository
+$ find content/ -name "*.md" -exec jupytext --to notebook {} \;
+# Run pre-commit on all files
+$ pre-commit run --all-files --show-diff-on-failure --color always
+# Convert all the new "cleaned" ipynb files to myst
+$ find content/ -name "*.ipynb" -exec jupytext --to md:myst {} \;
+# Remove the .ipynb files
+$ find content/ -name "*.ipynb" -exec rm {} \;
+
+Jupytext 
+https://jupytext.readthedocs.io/en/latest/install.html
+
+From jupyter notebook to myst 
+jupytext --to md:myst file.ipynb
+
+Myst format 
+https://myst-nb.readthedocs.io/en/latest/authoring/text-notebooks.html
